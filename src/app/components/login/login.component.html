@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div>
+    <div class="form-min-width">
+      <img class="img-center mt-5 mb-5 center-block" src="/assets/img/illustration-login.svg" width="156" alt="">
+
+      <h1 class="font-size-lg font-weight-medium mt-5 mb-5 text-center">Registro de atividades</h1>
+
+      <form name="formLogin" [formGroup]="creds">
+        <div class="form-group form-group-md">
+          <label for="usuario">Usuário</label>
+          <mat-form-field class="full__width" appearance="outline">
+
+            <input matInput id="usuario" type="text" formControlName="usuario" placeholder="Insira seu usuário"
+              autofocus>
+          </mat-form-field>
+        </div>
+        <div id="password" class="form-group form-group-md">
+          <label for="senha">Senha</label>
+          <mat-form-field class="full__width" appearance="outline">
+
+            <input matInput id="senha" type="password" formControlName="senha" placeholder="Coloque sua senha"
+              autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div class="form-group form-group-md mt-5">
+          <button class="btn btn-md btn-primary btn-block" type="submit" (click)="signin(creds)">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

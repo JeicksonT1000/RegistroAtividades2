@@ -1,1 +1,238 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: 'Circular Std';
+  font-style: normal;
+  src: url('src/assets/font/CircularStd-Book/CircularStd-Book.eot');
+  src: local('Material Icons'), local('CircularStd-Book'),
+    url('src/assets/font/CircularStd-Book/CircularStd-Book.woff2')
+      format('woff2'),
+    url('src/assets/font/CircularStd-Book/CircularStd-Book.woff') format('woff'),
+    url('src/assets/font/CircularStd-Book/CircularStd-Book.ttf')
+      format('truetype');
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Circular Std';
+}
+
+.mat-h1,
+.mat-headline,
+.mat-typography h1 {
+  /* font-family: 'Circular Std'; */
+  font: 400 24px/32px 'Circular Std';
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+.mat-body,
+.mat-body-1,
+.mat-typography {
+  font: 400 14px/20px 'Circular Std';
+  letter-spacing: normal;
+}
+
+.container-fluid {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -16px;
+  margin-left: -16px;
+}
+
+.col-md-4 {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.mt-5 {
+  margin-top: 24px !important;
+}
+
+.mb-5 {
+  margin-bottom: 24px !important;
+}
+
+.center-block {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.font-size-lg {
+  font-size: 20px !important;
+  line-height: 24px;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.form-group label {
+  color: #000000de;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.form-group-md .form-control {
+  height: 40px;
+  padding: 8px 12px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 32px;
+  padding: 4px 12px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  background-color: #fff;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-control:focus {
+  border-color: rgba(0, 0, 0, 0.87);
+  outline: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.87);
+}
+
+.form-control:disabled {
+  background-color: #f5f5f5;
+}
+
+.form-control::placeholder {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.btn {
+  font-family: 'Circular Std';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  display: inline-block;
+  padding: 4px 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  border: 0 none;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+}
+
+.btn:focus,
+.btn:hover {
+  text-decoration: none;
+  outline: 0;
+}
+
+.btn:focus {
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn.disabled,
+.btn:disabled {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.54);
+  background-color: #f5f5f5;
+}
+
+.btn-md {
+  padding: 8px 16px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #212121;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 3px #757575;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.full__width {
+  width: 100%;
+}
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+
+.mat-form-field {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.125;
+  letter-spacing: normal;
+}
+
+.mat-form-field,
+.mat-select {
+  font-family: 'Circular Std';
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.172em 0 0.61em;
+}
+
+.mat-form-field-infix {
+  padding: 0.5em 0;
+  border-top: 0.84375em solid #0000;
+}
+
+.mat-form-field-label-wrapper {
+  top: -0.84375em;
+  padding-top: 0.84375em;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 1em;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #000000;
+}
+
+#password .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .col-md-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+  .offset-md-4 {
+    margin-left: 33.33333%;
+  }
+}

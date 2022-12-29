@@ -1,0 +1,126 @@
+.header-default {
+  height: 95px;
+  padding-top: 20px;
+}
+
+.header-default::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 95px;
+  content: '';
+  background: url('src/assets/img/bg-header.png') no-repeat top center;
+  background-size: 1140px;
+}
+
+.container {
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.col-md-12 {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.ml-3 {
+  margin-left: 12px !important;
+}
+
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
+.font-size-xl {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.font-weight-light {
+  font-weight: 400;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.va-top {
+  vertical-align: top;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+  .col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media print {
+  .d-print-none {
+    display: none !important;
+  }
+
+  .d-print-inline {
+    display: inline !important;
+  }
+
+  .d-print-inline-block {
+    display: inline-block !important;
+  }
+
+  .d-print-block {
+    display: block !important;
+  }
+
+  .d-print-table {
+    display: table !important;
+  }
+
+  .d-print-table-row {
+    display: table-row !important;
+  }
+
+  .d-print-table-cell {
+    display: table-cell !important;
+  }
+
+  .d-print-flex {
+    display: flex !important;
+  }
+
+  .d-print-inline-flex {
+    display: inline-flex !important;
+  }
+}
