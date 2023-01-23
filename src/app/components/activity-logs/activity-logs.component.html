@@ -16,3 +16,42 @@
     </div>
   </div>
 </header>
+
+<section>
+  <div class="container mt-5">
+    <form class="row">
+      <div class="col-md-4">
+        <div class="form-group form-group-md">
+          <label for="inputFindUsers">Caloborador (a)</label>
+          
+          <mat-form-field class="full__width" appearance="outline">
+            <select class="form-control" id="inputFindUsers" ng-model="filtersActivities.nomeUsuario" required>
+              <option selected="selected" value="">Colaborador (a)</option>
+              <option ng-value="user.nome"></option>
+            </select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group form-group-md">
+          <label for="inputFindUsers">Data</label>
+          
+          <mat-form-field class="full__width" appearance="outline">
+            <input  id="date" type="text" class="form-control" ng-model="ctrl.momentDate" format="YYYY-MM-DD" min-date="ctrl.minDate" max-date="ctrl.maxDate" today="true" autocomplete="off">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-3 mt-1 d-print-none">
+				<button type="submit" class="btn_consultar btn btn-md btn-primary">Consultar</button>
+			</div>
+    </form>
+
+    <div class="row mt-4 mb-4 d-print-none">
+			<div class="col-md-6 text-left">
+        <button class="btn btn-md btn-secondary mr-4">Novo registro</button>
+				<button class="btn btn-md btn-secondary">Imprimir</button>
+			</div>
+		</div>
+  </div>
+</section>

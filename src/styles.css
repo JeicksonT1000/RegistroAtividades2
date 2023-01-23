@@ -170,6 +170,11 @@ body {
   background-color: #212121;
 }
 
+.btn-secondary {
+  color: #fff;
+  background-color: rgba(0,0,0,.38);
+}
+
 .btn-primary:focus {
   box-shadow: 0 0 0 3px #757575;
 }

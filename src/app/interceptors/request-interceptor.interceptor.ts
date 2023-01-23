@@ -15,6 +15,7 @@ export class RequestInterceptorInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    debugger
     let token = localStorage.getItem('__authenticationToken__');
 
     request.headers.set('Content-Type', 'application/json');
