@@ -30,6 +30,11 @@ export class LoginComponent implements OnInit {
     this.service.token(creds.value).subscribe((response) => {
       localStorage.setItem('__authenticationToken__', response.access_token);
 
+      localStorage.setItem(
+        '__authenticationUserData__',
+        creds.controls['usuario'].value
+      );
+
       this.router.navigate(['registro-atividades']);
     });
   };

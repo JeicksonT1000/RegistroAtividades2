@@ -14,10 +14,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ActivityLogsComponent } from './components/activity-logs/activity-logs.component';
 import { LoginComponent } from './components/login/login.component';
+import { RequestInterceptorProvider } from './interceptors/request-interceptor.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ActivityLogsComponent, LoginComponent],
@@ -34,9 +36,10 @@ import { LoginComponent } from './components/login/login.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatSnackBarModule,
   ],
-  providers: [],
+  providers: [RequestInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,6 +4,7 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -15,7 +16,6 @@ export class RequestInterceptorInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    debugger
     let token = localStorage.getItem('__authenticationToken__');
 
     request.headers.set('Content-Type', 'application/json');
@@ -31,3 +31,11 @@ export class RequestInterceptorInterceptor implements HttpInterceptor {
     }
   }
 }
+
+export const RequestInterceptorProvider = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptorInterceptor,
+    multi: true,
+  },
+];

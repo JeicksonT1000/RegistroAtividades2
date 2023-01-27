@@ -172,7 +172,7 @@ body {
 
 .btn-secondary {
   color: #fff;
-  background-color: rgba(0,0,0,.38);
+  background-color: rgba(0, 0, 0, 0.38);
 }
 
 .btn-primary:focus {
@@ -226,6 +226,10 @@ body {
 
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
   color: #000000;
+}
+
+.mat-select-arrow-wrapper {
+  vertical-align: baseline !important;
 }
 
 #password .mat-form-field-wrapper {
