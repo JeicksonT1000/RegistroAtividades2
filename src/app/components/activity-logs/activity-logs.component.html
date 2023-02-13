@@ -22,41 +22,72 @@
     <form class="row" name="activity-logs" [formGroup]="activityLogs">
       <div class="col-md-4">
         <div class="mt-4">
-          <label>Caloborador (a)</label>
+          <label>Colaborador (a)</label>
           <mat-form-field class="full__width" appearance="outline">
-
-            <mat-select id="colaborador" name="colaborador" formControlName="nomeUsuario" placeholder="Caloborador (a)">
-
-              <mat-option *ngFor="let user of users" [value]="user.nome">
+            <mat-select id="colaborador" name="colaborador" formControlName="nomeUsuario" placeholder="Colaborador (a)"
+            >
+              <mat-option (click)="changeValueName()" *ngFor="let user of users" [value]="user.nome">
                 {{user.nome}}
               </mat-option>
-
             </mat-select>
           </mat-form-field>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group form-group-md">
+        <div class="form-group form-group-md mt-4">
           <label>Data</label>
 
           <mat-form-field class="full__width" appearance="outline">
-
-            <input id="data" type="text" name="data" formControlName="data" matInput placeholder="00000-000"
-              autocomplete="off">
+            <input (click)="picker.open()" matInput [matDatepicker]="picker" 
+            id="datePicker" name="datePicker" formControlName="datePicker" autocomplete="off">
+            <mat-datepicker #picker (closed)="setButtonConsultfocus()"></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
 
-      <div class="col-md-3 mt-1 d-print-none">
-        <button type="submit" class="btn_consultar btn btn-md btn-primary">Consultar</button>
+      <div class="col-md-3 d-print-none">
+        <button id="consultar" type="submit" class="btn_consultar btn btn-md btn-primary" (click)="recordTasks()">Consultar</button>
       </div>
     </form>
 
     <div class="row mt-4 mb-4 d-print-none">
       <div class="col-md-6 text-left">
-        <button class="btn btn-md btn-secondary mr-4">Novo registro</button>
-        <button class="btn btn-md btn-secondary">Imprimir</button>
+        <button class="btn btn-md btn-secondary mr-4" (click)="openModalActivities()">Novo registro</button>
+        <button class="btn btn-md btn-secondary" onclick="window.print()">Imprimir</button>
       </div>
     </div>
+
+    <!-- <div ng-if="activities.isNotReady()">Carregando...</div>
+
+		<div class="alert alert-info" ng-if="activities.isReady() && activities.hasNotItems()">
+			Não há registro de atividades nesta data.
+		</div> -->
+
+		<div>
+			<table class="table align-left">
+				<tr id="table-header font-weight-medium">
+					<th title="Product Backlog Item">PBI</th>
+					<th>Descrição PBI</th>
+					<th>Task</th>
+					<th>Descrição task</th>
+					<th>Hora inicial</th>
+					<th>Hora final</th>
+				</tr>
+				<tr ng-class="{ 'highlited': !activity.dataHoraFim }" 
+        *ngFor="let task of tasksList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+          <td>#{{task.pbi}}</td>
+          <td>#{{task.descricaoPBI}}</td>
+          <td>#{{task.taskID}}</td>
+          <td>#{{task.descricaoTask}}</td>
+          <td>#{{task.dataHoraInicio}}</td>
+          <td>#{{task.dataHoraFim}}</td>
+					<td width="250" colspan="2" class="text-right btn-excluir-alterar">
+						<button class="btn btn-link">Alterar</button>
+						<button class="btn btn-link">Excluir</button>
+					</td>
+				</tr>
+			</table>
+		</div>
   </div>
+  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
 </section>

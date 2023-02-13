@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatNativeDateModule } from '@angular/material/core'
 //compoments
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,9 +20,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { ActivityLogsComponent } from './components/activity-logs/activity-logs.component';
 import { LoginComponent } from './components/login/login.component';
 import { RequestInterceptorProvider } from './interceptors/request-interceptor.interceptor';
+import { ActivitiesDialogModalComponent } from './components/activities-dialog-modal/activities-dialog-modal.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS
+} from '@angular/material-moment-adapter'
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core'
+
+export const MY_FORMATS = {
+  parse: {
+      dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+      dateInput: 'DD/MM/YYYY',
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
-  declarations: [AppComponent, ActivityLogsComponent, LoginComponent],
+  declarations: [AppComponent, ActivityLogsComponent, LoginComponent, ActivitiesDialogModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,8 +58,25 @@ import { RequestInterceptorProvider } from './interceptors/request-interceptor.i
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatNativeDateModule,
+    NgxPaginationModule
   ],
-  providers: [RequestInterceptorProvider],
+  providers: [
+    RequestInterceptorProvider,
+    {
+      provide: MAT_DATE_FORMATS, 
+      useValue:'pt-br' 
+    },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] 
+    },
+    {
+      provide: MAT_DATE_FORMATS, 
+      useValue: MY_FORMATS
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

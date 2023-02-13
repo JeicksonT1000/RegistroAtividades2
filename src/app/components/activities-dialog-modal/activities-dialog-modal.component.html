@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <div id="activity_modal">
+    <div class="modal-header">
+      <h5 id="modal-title" class="font-size-lg">Novo Registro de atividades</h5>
+      <button type="button" id="btn-close-modal">
+        <span class="material-icons" aria-hidden="true" (click)="close()">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form name="form_activity_modal" [formGroup]="activityLogs" #formDir="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="colaborador">Colaborador (a)</label>
+            <mat-form-field class="full__width" appearance="outline">
+              <mat-select id="colaborador" name="colaborador" formControlName="nomeUsuario" [disabled]="true" >
+                <mat-option *ngFor="let user of users" [value]="user.nome">
+                  {{ user.nome }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-group-md mt-4">
+              <label class="font-weight-medium">Data</label>
+              
+              <mat-form-field class="full__width" appearance="outline">
+                <input (focus)="picker.open()" (click)="picker.open()" matInput [matDatepicker]="picker" 
+                id="datePicker" name="datePicker" formControlName="datePicker" autocomplete="off"
+                >
+                <mat-datepicker #picker
+                (closed)="setTaskDescriptionFocus()"
+                ></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <span class="message-error" *ngIf="activityLogs.get('datePicker')?.errors?.['required'] && formDir.submitted">
+              *Campo obrigatório
+            </span>
+          </div>
+        </div>
+        <div>
+            <label class="task-description">Descrição task</label>
+            <mat-form-field class="full__width task-form-container" appearance="outline">
+              <mat-select id="taskID" name="taskID" formControlName="taskID" placeholder="Selecione o colaborador para visualizar as tasks">
+                <mat-option id="teste" *ngFor="let task of tasks" [value]="task.id" (click)="setInicialDateFocus()">
+                  {{ task.tituloCompleto }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <span class="message-error" *ngIf="activityLogs.get('taskID')?.errors?.['required'] && formDir.submitted">
+          *Campo obrigatório
+        </span>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group form-group-md mt-4">
+              <label>Hora inicial</label>
+    
+              <mat-form-field class="full__width" appearance="outline">
+                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput autocomplete="off" (keyup)="setFinalHourFocus()">
+              </mat-form-field>
+            </div>
+            <span class="message-error" *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
+              *Campo obrigatório
+            </span>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-group-md mt-4">
+              <label>Hora final</label>
+    
+              <mat-form-field class="full__width" appearance="outline">
+                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput autocomplete="off">
+              </mat-form-field>
+            </div>
+            <span class="message-error" *ngIf="activityLogs.get('dataHoraFim')?.errors?.['required'] && formDir.submitted">
+              *Campo obrigatório
+            </span>
+          </div>
+        </div>
+        <div class="row modal-footer">
+          <div class="btn-footer">
+            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="close()">cancelar</button>
+            <button type="submit" class="btn-salvar btn btn-md btn-primary" (click)="sendData()">salvar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
