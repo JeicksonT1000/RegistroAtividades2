@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div id="activity_modal">
+    <div class="modal-header">
+      <h5 id="modal-title" class="font-size-lg">Alterar registro de atividade</h5>
+      <button type="button" id="btn-close-modal">
+        <span class="material-icons" aria-hidden="true" (click)="close()">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form name="form_activity_modal" [formGroup]="activityLogs" #formDir="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group form-group-md mt-4">
+              <label>PBI</label>
+              
+              <mat-form-field class="full__width" appearance="outline">
+                <input id="descricaoPBI" type="text" name="descricaoPBI" formControlName="descricaoPBI" matInput autocomplete="off">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-group-md mt-4">
+              <label>Data</label>
+              
+              <mat-form-field class="full__width" appearance="outline">
+                <input matInput 
+                id="dataSelecionada" name="dataSelecionada" formControlName="dataSelecionada" autocomplete="off"
+                >
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+     
+        <div class="form-group form-group-md mt-4">
+          <label>Descrição da task</label>
+          <mat-form-field class="full__width task-form-container" appearance="outline">
+            <input id="descricaoTask" type="text" name="descricaoTask" formControlName="descricaoTask" matInput autocomplete="off">
+          </mat-form-field>
+        </div>
+       
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group form-group-md mt-4">
+              <label>Hora inicial</label>
+    
+              <mat-form-field class="full__width" appearance="outline">
+                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput autocomplete="off" (keyup)="setFinalHourFocus()">
+              </mat-form-field>
+            </div>
+          
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-group-md mt-4">
+              <label>Hora final</label>
+    
+              <mat-form-field class="full__width" appearance="outline">
+                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput autocomplete="off">
+              </mat-form-field>
+            </div>
+           
+          </div>
+        </div>
+       
+        <div class="row modal-footer">
+          <div class="btn-footer">
+            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="close()">cancelar</button>
+            <button type="submit" class="btn-salvar btn btn-md btn-primary" (click)="changeHourTask()">salvar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

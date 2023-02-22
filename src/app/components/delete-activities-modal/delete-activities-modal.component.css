@@ -51,10 +51,6 @@ label.task-description {
   margin-right: 12px;
 }
 
-.activities-list {
-  position: relative;
-  z-index: 10;
-}
 
 #btn-close-modal {
   background-color: transparent;
@@ -63,20 +59,4 @@ label.task-description {
   bottom: 5px;
 }
 
-#horaInicial::-webkit-datetime-edit-ampm-field,
-#horaFinal::-webkit-datetime-edit-ampm-field {
-  display: none;
-}
-
-#horaInicial::-webkit-calendar-picker-indicator,
-#horaFinal::-webkit-calendar-picker-indicator {
-  background: none;
-}
-
-.message-error {
-  width: 100px;
-  color: red;
-  position: relative;
-  bottom: 14px;
-}
 

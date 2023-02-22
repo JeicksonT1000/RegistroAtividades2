@@ -27,7 +27,9 @@ import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS
 } from '@angular/material-moment-adapter'
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core'
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { UpdateActiviesModalDialogComponent } from './components/update-activies-modal-dialog/update-activies-modal-dialog.component';
+import { DeleteActivitiesModalComponent } from './components/delete-activities-modal/delete-activities-modal.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -42,7 +44,7 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [AppComponent, ActivityLogsComponent, LoginComponent, ActivitiesDialogModalComponent],
+  declarations: [AppComponent, ActivityLogsComponent, LoginComponent, ActivitiesDialogModalComponent, UpdateActiviesModalDialogComponent, DeleteActivitiesModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

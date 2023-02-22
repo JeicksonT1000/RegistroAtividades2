@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div id="activity_modal">
+    <div class="modal-header">
+      <h5 id="modal-title" class="font-size-lg">Excluir registro?</h5>
+      <button type="button" id="btn-close-modal">
+        <span class="material-icons" aria-hidden="true" (click)="close()">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>Tem certeza que deseja excluir o registro desta tarefa?</p>
+        
+        <div class="row modal-footer">
+          <div class="btn-footer">
+            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary">cancelar</button>
+            <button type="submit" class="btn-salvar btn btn-md btn-primary" (click)="deleteActivity()">confirmar</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

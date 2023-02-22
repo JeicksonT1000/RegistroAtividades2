@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <!-- <div ng-if="activities.isNotReady()">Carregando...</div>
+    <div ng-if="activities.isNotReady()">Carregando...</div>
 
 		<div class="alert alert-info" ng-if="activities.isReady() && activities.hasNotItems()">
 			Não há registro de atividades nesta data.
@@ -73,17 +73,17 @@
 					<th>Hora inicial</th>
 					<th>Hora final</th>
 				</tr>
-				<tr ng-class="{ 'highlited': !activity.dataHoraFim }" 
-        *ngFor="let task of tasksList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+				<tr class="table-even"
+        *ngFor="let task of tasksList | paginate: { itemsPerPage: 25, currentPage: paginaAtual }; let i = index">
           <td>#{{task.pbi}}</td>
-          <td>#{{task.descricaoPBI}}</td>
+          <td>{{task.descricaoPBI}}</td>
           <td>#{{task.taskID}}</td>
-          <td>#{{task.descricaoTask}}</td>
-          <td>#{{task.dataHoraInicio}}</td>
-          <td>#{{task.dataHoraFim}}</td>
+          <td>{{task.descricaoTask}}</td>
+          <td>{{task.dataHoraInicio}}</td>
+          <td>{{task.dataHoraFim}}</td>
 					<td width="250" colspan="2" class="text-right btn-excluir-alterar">
-						<button class="btn btn-link">Alterar</button>
-						<button class="btn btn-link">Excluir</button>
+						<button class="btn btn-link" (click)="openUpdateActivitiesModal(task.id)">Alterar</button>
+						<button class="btn btn-link" (click)="openDeleteActivitiesModal(task.taskID)">Excluir</button>
 					</td>
 				</tr>
 			</table>

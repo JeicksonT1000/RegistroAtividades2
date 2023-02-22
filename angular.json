@@ -87,6 +87,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "move-safe:build",
+            "proxyConfig": "src/proxy.config.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "RegistroAtividadesV2:build:production"
@@ -109,4 +113,5 @@
   "cli": {
     "analytics": "e77f7a32-066c-4ce3-abf7-ffc51c97bf75"
   }
+  
 }

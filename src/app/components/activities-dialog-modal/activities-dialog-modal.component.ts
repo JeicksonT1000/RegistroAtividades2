@@ -123,7 +123,7 @@ export class ActivitiesDialogModalComponent implements OnInit {
 
     this.activityLogs.value.dataHoraFim = newDate.format('YYYY-MM-DD') + "T" + this.activityLogs.value.dataHoraFim + ':00-03:00'
     
-    // this.createActivitiesService.createActivities(this.activityLogs.value).subscribe()
+    this.createActivitiesService.createActivities(this.activityLogs.value).subscribe()
 
     this._elementRef.nativeElement.querySelector(`#datePicker`).value = '';
     this._elementRef.nativeElement.querySelector(`#datePicker`).focus()
@@ -137,5 +137,8 @@ export class ActivitiesDialogModalComponent implements OnInit {
     let user = localStorage.getItem('__authenticationUserData__');
 
     this.activityLogs.get('nomeUsuario').setValue(user);
+
+    localStorage.setItem('__reloadPage__', JSON.stringify(true))
+
   }
 }
