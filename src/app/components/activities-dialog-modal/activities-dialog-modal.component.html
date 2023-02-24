@@ -3,7 +3,7 @@
     <div class="modal-header">
       <h5 id="modal-title" class="font-size-lg">Novo Registro de atividades</h5>
       <button type="button" id="btn-close-modal">
-        <span class="material-icons" aria-hidden="true" (click)="close()">close</span>
+        <span class="material-icons" aria-hidden="true" (click)="closeModal()">close</span>
       </button>
     </div>
     <div class="modal-body">
@@ -12,7 +12,7 @@
           <div class="col-md-6">
             <label class="colaborador">Colaborador (a)</label>
             <mat-form-field class="full__width" appearance="outline">
-              <mat-select id="colaborador" name="colaborador" formControlName="nomeUsuario" [disabled]="true" >
+              <mat-select id="colaborador" name="colaborador" formControlName="nomeUsuario" [disabled]="true">
                 <mat-option *ngFor="let user of users" [value]="user.nome">
                   {{ user.nome }}
                 </mat-option>
@@ -68,7 +68,9 @@
               <label>Hora final</label>
     
               <mat-form-field class="full__width" appearance="outline">
-                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput autocomplete="off">
+                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput autocomplete="off"
+                (keyup)="setFocusOnSaveButton()"  
+                >
               </mat-form-field>
             </div>
             <span class="message-error" *ngIf="activityLogs.get('dataHoraFim')?.errors?.['required'] && formDir.submitted">
@@ -78,8 +80,8 @@
         </div>
         <div class="row modal-footer">
           <div class="btn-footer">
-            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="close()">cancelar</button>
-            <button type="submit" class="btn-salvar btn btn-md btn-primary" (click)="sendData()">salvar</button>
+            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="closeModal()">cancelar</button>
+            <button type="submit" id="btn-save" class="btn-save btn btn-md btn-primary" (click)="registerActivity()">salvar</button>
           </div>
         </div>
       </form>

@@ -73,6 +73,10 @@ body {
   margin-bottom: 24px !important;
 }
 
+.position {
+  position: fixed;
+}
+
 .center-block {
   margin-left: auto;
   margin-right: auto;
@@ -324,7 +328,6 @@ button {
   justify-content: space-between;
   align-items: center;
 }
-
 
 @media (min-width: 768px) {
   .col-md-4 {

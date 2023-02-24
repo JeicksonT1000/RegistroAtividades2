@@ -32,5 +32,10 @@ export class DeleteActivitiesModalComponent implements OnInit {
     let id = JSON.parse(localStorage.getItem('__userId__'))
 
     this.recordeTasksService.deleteTask(id).subscribe()
+
+    this.close()
+
+    localStorage.setItem('__reloadPage__', JSON.stringify(true))
+
   }
 }

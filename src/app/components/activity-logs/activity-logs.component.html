@@ -21,7 +21,7 @@
   <div class="container mt-5">
     <form class="row" name="activity-logs" [formGroup]="activityLogs">
       <div class="col-md-4">
-        <div class="mt-4">
+        <div class="form-group form-group-md mt-4">
           <label>Colaborador (a)</label>
           <mat-form-field class="full__width" appearance="outline">
             <mat-select id="colaborador" name="colaborador" formControlName="nomeUsuario" placeholder="Colaborador (a)"
@@ -52,18 +52,18 @@
 
     <div class="row mt-4 mb-4 d-print-none">
       <div class="col-md-6 text-left">
-        <button class="btn btn-md btn-secondary mr-4" (click)="openModalActivities()">Novo registro</button>
-        <button class="btn btn-md btn-secondary" onclick="window.print()">Imprimir</button>
+        <button class="btn btn-md btn-primary mr-4" (click)="openModalActivities()">Novo registro</button>
+        <button class="btn btn-md btn-primary" onclick="window.print()">Imprimir</button>
       </div>
     </div>
 
-    <div ng-if="activities.isNotReady()">Carregando...</div>
+    <div *ngIf="!isNotReady">Carregando...</div>
 
-		<div class="alert alert-info" ng-if="activities.isReady() && activities.hasNotItems()">
+		<div class="alert alert-info" *ngIf="!isReady && isReady !== undefined">
 			Não há registro de atividades nesta data.
-		</div> -->
+		</div> 
 
-		<div>
+		<div *ngIf="isReady">
 			<table class="table align-left">
 				<tr id="table-header font-weight-medium">
 					<th title="Product Backlog Item">PBI</th>
@@ -82,8 +82,8 @@
           <td>{{task.dataHoraInicio}}</td>
           <td>{{task.dataHoraFim}}</td>
 					<td width="250" colspan="2" class="text-right btn-excluir-alterar">
-						<button class="btn btn-link" (click)="openUpdateActivitiesModal(task.id)">Alterar</button>
-						<button class="btn btn-link" (click)="openDeleteActivitiesModal(task.taskID)">Excluir</button>
+						<button class="btn btn-link" (click)="openActivityUpdateModal(task.id)">Alterar</button>
+						<button class="btn btn-link" (click)="openActivityDeleteModal(task.id)">Excluir</button>
 					</td>
 				</tr>
 			</table>

@@ -80,3 +80,7 @@ label.task-description {
   bottom: 14px;
 }
 
+#activity_modal #dataHoraInicio,
+#activity_modal #dataHoraFim {
+  background-color: transparent;
+}

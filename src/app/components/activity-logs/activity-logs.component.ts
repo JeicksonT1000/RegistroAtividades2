@@ -19,6 +19,8 @@ export class ActivityLogsComponent implements OnInit {
   users = [];
   tasksList = [];
   paginaAtual = 1
+  isReady = undefined
+  isNotReady = false
 
   // Seta a data de atual
   currentDate = new Date()
@@ -27,7 +29,6 @@ export class ActivityLogsComponent implements OnInit {
     nomeUsuario: [''],
     datePicker: [this.currentDate],
   });
-task: any;
 
   constructor(
     private titleService: Title,
@@ -35,7 +36,7 @@ task: any;
     private _formBuilder: FormBuilder,
     public dialog: MatDialog,
     private adapter: DateAdapter<any>,
-    private recordeTasksService: RecordTasksService,
+    private recordTasksService: RecordTasksService,
     private _elementRef : ElementRef
   ) {
   }
@@ -46,10 +47,13 @@ task: any;
 
     this.getUsersLogged();
 
+    // Seta a data no padrão brasileiro
     this.adapter.setLocale('pt-br')
 
     setTimeout(() => {
       this.recordTasks()
+
+      this.isNotReady = true
     }, 500)
   }
 
@@ -57,12 +61,12 @@ task: any;
     this.dialog.open(ActivitiesDialogModalComponent)
   }
 
-  openDeleteActivitiesModal(id): void {
+  openActivityDeleteModal(id): void {
     this.dialog.open(DeleteActivitiesModalComponent)
     localStorage.setItem('__userId__', JSON.stringify(id))
   }
 
-  openUpdateActivitiesModal(id): void {
+  openActivityUpdateModal(id): void {
     this.dialog.open(UpdateActiviesModalDialogComponent)
     let date = String(this.activityLogs.value.datePicker)
     let newDate: moment.Moment = moment.utc(this.activityLogs.value.datePicker).local();
@@ -85,12 +89,18 @@ task: any;
   //  Recupera as atividades
   recordTasks() {
     let date = String(this.activityLogs.value.datePicker)
-    let newDate: moment.Moment = moment.utc(this.activityLogs.value.datePicker).local();
-    date = newDate.format('YYYY-MM-DD')
+    let dateFormatted: moment.Moment = moment.utc(this.activityLogs.value.datePicker).local();
+    date = dateFormatted.format('YYYY-MM-DD')
 
 
-    this.recordeTasksService.getFilterName(this.activityLogs.value.nomeUsuario, date).subscribe((item) => {
+    this.recordTasksService.getFilterName(this.activityLogs.value.nomeUsuario, date).subscribe((item) => {
      const data = item.itens
+
+     if(data.length > 0) {
+      this.isReady = true
+     } else {
+      this.isReady = false
+     }
 
      this.tasksList = data.map(item => {
       return {
@@ -98,7 +108,6 @@ task: any;
         dataHoraInicio: item.dataHoraInicio.slice(11, 16),
         dataHoraFim: item.dataHoraFim.slice(11, 16)
       }
-      
      })
     })
   }
@@ -113,17 +122,18 @@ task: any;
     dataHoraFinalFocused.focus()
   }
 
+  // Atualiza a listagem de atividades assim que cadastramos uma atividade
   ngDoCheck() {
     let reload = JSON.parse(localStorage.getItem('__reloadPage__'))
 
     if(!!reload && reload === true) {
       setTimeout(() => {
         this.recordTasks()
-      }, 400)
+      }, 200)
 
       setTimeout(() => {
         localStorage.removeItem('__reloadPage__')
-      }, 500)
+      }, 300)
     }
   }
 }

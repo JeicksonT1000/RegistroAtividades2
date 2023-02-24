@@ -10,12 +10,15 @@ import { RecordTasksService } from 'src/app/services/record-tasks.service';
   styleUrls: ['./update-activies-modal-dialog.component.css']
 })
 export class UpdateActiviesModalDialogComponent implements OnInit {
+  dataSelecionada = localStorage.getItem('__userDate__')
   closeDialog = false 
   taskSelected = []
-
+  pbi = null
+  taskID = null
+  
   activityLogs = this._formBuilder.group({
     descricaoPBI: [''],
-    dataSelecionada: [''],
+    dataSelecionada: [this.dataSelecionada],
     dataHoraInicio: [''],
     dataHoraFim: [''],
     descricaoTask: [''],
@@ -50,18 +53,17 @@ export class UpdateActiviesModalDialogComponent implements OnInit {
     this.recordeTasksService.getFilterName(userName, userDate).subscribe(item => {
       var data = item.itens
 
-      
       this.taskSelected = data
-
-      setTimeout(() => {
-        console.log(this.taskSelected)
-      }, 500)
 
       data.filter(item => {
         if(item.id === id) {
           this.activityLogs.get('descricaoPBI').setValue(item.descricaoPBI)
           this.activityLogs.get('dataSelecionada').setValue(userDate)
           this.activityLogs.get('descricaoTask').setValue(item.descricaoTask)
+          this.activityLogs.get('dataHoraInicio').setValue(item.dataHoraInicio.slice(11, 16))
+          this.activityLogs.get('dataHoraFim').setValue(item.dataHoraFim.slice(11, 16))
+          this.pbi = item.pbi
+          this.taskID = item.taskID
         }
       })
     })
@@ -77,26 +79,27 @@ export class UpdateActiviesModalDialogComponent implements OnInit {
   }
 
   changeHourTask() {
-     let userId = JSON.parse(localStorage.getItem('__userId__'))
-
      var data = {}
 
-     let newDate: moment.Moment = moment.utc(this.activityLogs.value.dataSelecionada).local();
+     let userDate = JSON.parse(localStorage.getItem('__userDate__'))
 
-     this.activityLogs.value.dataHoraInicio = newDate.format('YYYY-MM-DD') + "T" + this.activityLogs.value.dataHoraInicio + ':00-03:00'
+     this.activityLogs.value.dataHoraInicio = userDate + "T" + this.activityLogs.value.dataHoraInicio + ':00-03:00'
 
-    this.activityLogs.value.dataHoraFim = newDate.format('YYYY-MM-DD') + "T" + this.activityLogs.value.dataHoraFim + ':00-03:00'
+    this.activityLogs.value.dataHoraFim = userDate + "T" + this.activityLogs.value.dataHoraFim + ':00-03:00'
 
      this.taskSelected.map(item => {
        data = {
         ...item,
+        dataSelecionada: this.activityLogs.value.dataSelecionada,
         dataHoraInicio: this.activityLogs.value.dataHoraInicio,
         dataHoraFim: this.activityLogs.value.dataHoraFim,
        }
      })
 
-     this.recordeTasksService.updateTasks(userId, {
-      ...data
-     }).subscribe()
+     this.close()
+     
+     this.recordeTasksService.updateTasks(data).subscribe()
+
+     localStorage.setItem('__reloadPage__', JSON.stringify(true))
   }
 }

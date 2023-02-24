@@ -11,10 +11,10 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group form-group-md mt-4">
-              <label>PBI</label>
+              <label>PBI #{{ pbi }}</label>
               
               <mat-form-field class="full__width" appearance="outline">
-                <input id="descricaoPBI" type="text" name="descricaoPBI" formControlName="descricaoPBI" matInput autocomplete="off">
+                <input id="descricaoPBI" [readonly]="true" type="text" name="descricaoPBI" formControlName="descricaoPBI" matInput autocomplete="off">
               </mat-form-field>
             </div>
           </div>
@@ -23,8 +23,8 @@
               <label>Data</label>
               
               <mat-form-field class="full__width" appearance="outline">
-                <input matInput 
-                id="dataSelecionada" name="dataSelecionada" formControlName="dataSelecionada" autocomplete="off"
+                <input matInput [disabled]="true"
+                id="dataSelecionada" class="readonly " name="dataSelecionada" formControlName="dataSelecionada" autocomplete="off"
                 >
               </mat-form-field>
             </div>
@@ -32,9 +32,9 @@
         </div>
      
         <div class="form-group form-group-md mt-4">
-          <label>Descrição da task</label>
+          <label>Descrição da task #{{ taskID }}</label>
           <mat-form-field class="full__width task-form-container" appearance="outline">
-            <input id="descricaoTask" type="text" name="descricaoTask" formControlName="descricaoTask" matInput autocomplete="off">
+            <input id="descricaoTask" class="readonly" [readonly]="true" type="text" name="descricaoTask" formControlName="descricaoTask" matInput autocomplete="off">
           </mat-form-field>
         </div>
        

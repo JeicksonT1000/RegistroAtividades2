@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_CONFIG } from '../config/api.config';
@@ -34,26 +34,20 @@ export class RecordTasksService {
     })
   }
 
-  updateTasks(id, data): Observable<any> {
-    const headers = new HttpHeaders()
-    .append('Content-Type', 'application/json')
-    .append('Access-Control-Allow-Headers', 'Content-Type')
-    .append('Access-Control-Allow-Methods', 'PUT')
-    .append('Access-Control-Allow-Origin', '*');
-    let httpOptions = {
-      headers: headers
-    }
-    return this.http.put<any>(`${this.api.baseUrl}/registros-atividades/${id}`, data, httpOptions)
+  updateTasks(data): Observable<any> {
+    return this.http.put<any>(`${this.api.baseUrl}/registros-atividades`, data)
   }
 
   deleteTask(id): Observable<any> {  
-    const headers = new HttpHeaders().append('Content-Type', 'application/json')
-   
-    let httpOptions = {
-      headers: headers
-    }
-    console.log(headers) 
-     
-    return this.http.delete<any>(`${this.api.baseUrl}/registros-atividades/${id}`, httpOptions)
+    
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: `${id}`
+      },
+    };     
+    return this.http.delete<any>(`${this.api.baseUrl}/registros-atividades`, options)
   }
 }

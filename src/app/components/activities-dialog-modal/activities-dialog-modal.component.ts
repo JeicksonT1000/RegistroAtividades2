@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { UserLoggedService } from 'src/app/services/user-logged.service';
@@ -7,6 +7,7 @@ import { RecordTasksService } from 'src/app/services/record-tasks.service';
 import { DateAdapter } from '@angular/material/core';
 import * as moment from 'moment';
 import { CreateActivitiesService } from 'src/app/services/create-activities.service';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-activities-dialog-modal',
@@ -25,6 +26,7 @@ export class ActivitiesDialogModalComponent implements OnInit {
     dataHoraFim: ['', [Validators.required]],
     taskID: ['', [Validators.required]]
   });
+  @ViewChild(MatDatepicker) datePicker: MatDatepicker<Date>;
 
   constructor(
     public dialogRef: MatDialogRef<ActivitiesDialogModalComponent>,
@@ -49,15 +51,25 @@ export class ActivitiesDialogModalComponent implements OnInit {
       this.setDateFocus(); 
     }, 300)
 
+    // Setando data para formato brasileiro
     this.adapter.setLocale('pt-br')
 
-  }
+    
+    let userLoggedDateSelected = JSON.parse(localStorage.getItem('__prevUserLoggedDateSelected__'))
 
-  close(): void {
+    if(userLoggedDateSelected) {
+      this.activityLogs.get('datePicker').setValue(userLoggedDateSelected)
+    }
+  }
+  
+
+  closeModal(): void {
     this.closeDialog = true
     if(this.closeDialog) {
       this.dialogRef.close();
     }
+
+    localStorage.removeItem('__prevUserLoggedDateSelected__')
   }
 
   getUsersLogged() {
@@ -85,8 +97,12 @@ export class ActivitiesDialogModalComponent implements OnInit {
   }
 
   setDateFocus() { 
-    let dataFocused = this._elementRef.nativeElement.querySelector(`#datePicker`);
-    dataFocused.focus()
+    let userLoggedDateSelected = JSON.parse(localStorage.getItem('__prevUserLoggedDateSelected__'))
+
+    if(!userLoggedDateSelected) {
+      let dataFocused = this._elementRef.nativeElement.querySelector(`#datePicker`);
+      dataFocused.focus()
+    }
   } 
 
   setFinalHourFocus() { 
@@ -114,31 +130,36 @@ export class ActivitiesDialogModalComponent implements OnInit {
     dataHoraInicioFocused.focus()
   }
 
-  sendData() {
-    let newDate: moment.Moment = moment.utc(this.activityLogs.value.datePicker).local();
+  setFocusOnSaveButton() {
+    let focusOnEndDate = this._elementRef.nativeElement.querySelector(`#dataHoraFim`);
 
-    this.activityLogs.value.datePicker = newDate.format('DD/MM/YYYY')
+    if(focusOnEndDate.value.length === 5) {
+      let focusOnSaveButton = this._elementRef.nativeElement.querySelector(`#btn-save`);
+      focusOnSaveButton.focus()
+    }
+  }
 
-    this.activityLogs.value.dataHoraInicio = newDate.format('YYYY-MM-DD') + "T" + this.activityLogs.value.dataHoraInicio + ':00-03:00'
+  registerActivity() {
+    let formattedDate: moment.Moment = moment.utc(this.activityLogs.value.datePicker).local();
 
-    this.activityLogs.value.dataHoraFim = newDate.format('YYYY-MM-DD') + "T" + this.activityLogs.value.dataHoraFim + ':00-03:00'
+    this.activityLogs.value.datePicker = formattedDate.format('DD/MM/YYYY')
+
+    this.activityLogs.value.dataHoraInicio = formattedDate.format('YYYY-MM-DD') + "T" + this.activityLogs.value.dataHoraInicio + ':00-03:00'
+
+    this.activityLogs.value.dataHoraFim = formattedDate.format('YYYY-MM-DD') + "T" + this.activityLogs.value.dataHoraFim + ':00-03:00'
     
     this.createActivitiesService.createActivities(this.activityLogs.value).subscribe()
 
-    this._elementRef.nativeElement.querySelector(`#datePicker`).value = '';
-    this._elementRef.nativeElement.querySelector(`#datePicker`).focus()
+    this.closeModal()
 
-    this._elementRef.nativeElement.querySelector(`#taskID`).value = 'Task';
-    this._elementRef.nativeElement.querySelector(`#dataHoraInicio`).value = '';
-    this._elementRef.nativeElement.querySelector(`#dataHoraFim`).value = '';
-
-    this.activityLogs.reset()
+    this.dialog.open(ActivitiesDialogModalComponent)
 
     let user = localStorage.getItem('__authenticationUserData__');
 
     this.activityLogs.get('nomeUsuario').setValue(user);
 
     localStorage.setItem('__reloadPage__', JSON.stringify(true))
+    localStorage.setItem('__prevUserLoggedDateSelected__', JSON.stringify(this.activityLogs.value.datePicker))
 
   }
 }
