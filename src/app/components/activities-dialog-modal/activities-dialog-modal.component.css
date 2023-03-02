@@ -35,12 +35,12 @@ label.task-description {
   font-weight: 500;
 }
 
-.modal-body {
-  padding: 24px;
-}
-
 .modal-footer {
   justify-content: flex-end;
+}
+
+.hours-padding {
+  padding-bottom: 34px;
 }
 
 .btn-footer {
@@ -54,13 +54,6 @@ label.task-description {
 .activities-list {
   position: relative;
   z-index: 10;
-}
-
-#btn-close-modal {
-  background-color: transparent;
-  border: 0;
-  position: relative;
-  bottom: 5px;
 }
 
 #horaInicial::-webkit-datetime-edit-ampm-field,

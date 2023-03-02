@@ -1,0 +1,35 @@
+<header class="header-default d-print-none" aria-labelledby="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ml-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="28" viewBox="0 0 35 28">
+          <g fill="none" fill-rule="evenodd">
+            <g fill-rule="nonzero">
+              <path fill="#FFF" d="M35.044 27.634l-6.447.018-7.372-20.893-7.964 12.272L.113 27.637 19.326.312h5.488z" />
+              <path fill="#F89B1C" d="M11.507 27.637H.113l19.18-11.194z" />
+            </g>
+          </g>
+        </svg>
+        <h1 id="header" class="ml-3 d-inline font-size-xl font-weight-light color-white va-top">Registro de atividades
+          manuais</h1>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="container mt-5">
+    <form class="row" name="activity-logs" [formGroup]="activityLogs">
+      <div class="col-md-4">
+        <div class="form-group form-group-md mt-4">
+          <mat-form-field class="full__width task-form-container" appearance="outline">
+            <mat-select id="taskID" name="taskID" formControlName="taskID" placeholder="Selecione a atividade">
+              <mat-option id="teste" *ngFor="let activity of activities" [value]="activity.id">
+                {{ activity.tituloCompleto }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

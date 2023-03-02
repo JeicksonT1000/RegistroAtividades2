@@ -2,10 +2,11 @@
   <div id="activity_modal">
     <div class="modal-header">
       <h5 id="modal-title" class="font-size-lg">Novo Registro de atividades</h5>
-      <button type="button" id="btn-close-modal">
-        <span class="material-icons" aria-hidden="true" (click)="closeModal()">close</span>
+      <button type="button" id="btn-close">
+        <span class="material-icons" aria-hidden="true" (click)="closeActivityModal()">close</span>
       </button>
     </div>
+    <div class="divisor"></div>
     <div class="modal-body">
       <form name="form_activity_modal" [formGroup]="activityLogs" #formDir="ngForm">
         <div class="row">
@@ -28,7 +29,7 @@
                 id="datePicker" name="datePicker" formControlName="datePicker" autocomplete="off"
                 >
                 <mat-datepicker #picker
-                (closed)="setTaskDescriptionFocus()"
+                (closed)="setFocusOnTaskDescription()"
                 ></mat-datepicker>
               </mat-form-field>
             </div>
@@ -40,9 +41,9 @@
         <div>
             <label class="task-description">Descrição task</label>
             <mat-form-field class="full__width task-form-container" appearance="outline">
-              <mat-select id="taskID" name="taskID" formControlName="taskID" placeholder="Selecione o colaborador para visualizar as tasks">
-                <mat-option id="teste" *ngFor="let task of tasks" [value]="task.id" (click)="setInicialDateFocus()">
-                  {{ task.tituloCompleto }}
+              <mat-select id="taskID" name="taskID" formControlName="taskID" placeholder="Selecione o colaborador para visualizar as atividades">
+                <mat-option id="teste" *ngFor="let activity of activities" [value]="activity.id" (click)="setFocusAtInitialHour()">
+                  {{ activity.tituloCompleto }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -50,13 +51,13 @@
         <span class="message-error" *ngIf="activityLogs.get('taskID')?.errors?.['required'] && formDir.submitted">
           *Campo obrigatório
         </span>
-        <div class="row">
+        <div class="row hours-padding">
           <div class="col-md-6">
             <div class="form-group form-group-md mt-4">
               <label>Hora inicial</label>
     
               <mat-form-field class="full__width" appearance="outline">
-                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput autocomplete="off" (keyup)="setFinalHourFocus()">
+                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput autocomplete="off" (keyup)="setFocusAtFinalHour()">
               </mat-form-field>
             </div>
             <span class="message-error" *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
@@ -78,9 +79,10 @@
             </span>
           </div>
         </div>
+        <div class="divisor"></div>
         <div class="row modal-footer">
           <div class="btn-footer">
-            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="closeModal()">cancelar</button>
+            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="closeActivityModal()">cancelar</button>
             <button type="submit" id="btn-save" class="btn-save btn btn-md btn-primary" (click)="registerActivity()">salvar</button>
           </div>
         </div>

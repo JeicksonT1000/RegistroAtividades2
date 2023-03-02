@@ -9,7 +9,7 @@ import { UpdateActiviesModalDialogComponent } from '../update-activies-modal-dia
   styleUrls: ['./delete-activities-modal.component.css']
 })
 export class DeleteActivitiesModalComponent implements OnInit {
-  closeDialog = false
+  closeModal = false
   
   constructor(
     public dialogRef: MatDialogRef<UpdateActiviesModalDialogComponent>,
@@ -20,9 +20,9 @@ export class DeleteActivitiesModalComponent implements OnInit {
   }
 
   // Fechar o modal
-  close(): void {
-    this.closeDialog = true
-    if(this.closeDialog) {
+  closeDeleteModal(): void {
+    this.closeModal = true
+    if(this.closeModal) {
       this.dialogRef.close();
     }
   }
@@ -33,7 +33,7 @@ export class DeleteActivitiesModalComponent implements OnInit {
 
     this.recordeTasksService.deleteTask(id).subscribe()
 
-    this.close()
+    this.closeDeleteModal()
 
     localStorage.setItem('__reloadPage__', JSON.stringify(true))
 

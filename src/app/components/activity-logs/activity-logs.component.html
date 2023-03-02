@@ -16,7 +16,7 @@
     </div>
   </div>
 </header>
-
+<div class="divisor"></div>
 <section>
   <div class="container mt-5">
     <form class="row" name="activity-logs" [formGroup]="activityLogs">
@@ -89,5 +89,5 @@
 			</table>
 		</div>
   </div>
-  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+  <pagination-controls *ngIf="tasksList.length > 0" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
 </section>

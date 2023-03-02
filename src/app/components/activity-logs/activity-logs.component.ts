@@ -47,6 +47,8 @@ export class ActivityLogsComponent implements OnInit {
 
     this.getUsersLogged();
 
+    localStorage.removeItem('__prevUserLoggedDateSelected__')
+
     // Seta a data no padrão brasileiro
     this.adapter.setLocale('pt-br')
 

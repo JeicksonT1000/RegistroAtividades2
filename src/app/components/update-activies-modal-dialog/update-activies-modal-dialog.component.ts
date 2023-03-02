@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
+import { MatDialogRef } from '@angular/material/dialog';
 import { RecordTasksService } from 'src/app/services/record-tasks.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-update-activies-modal-dialog',
@@ -10,17 +11,18 @@ import { RecordTasksService } from 'src/app/services/record-tasks.service';
   styleUrls: ['./update-activies-modal-dialog.component.css']
 })
 export class UpdateActiviesModalDialogComponent implements OnInit {
-  dataSelecionada = localStorage.getItem('__userDate__')
-  closeDialog = false 
-  taskSelected = []
+  
+  closeModal = false 
+  activitySelected = []
   pbi = null
   taskID = null
+  disabled = true;
   
   activityLogs = this._formBuilder.group({
     descricaoPBI: [''],
-    dataSelecionada: [this.dataSelecionada],
-    dataHoraInicio: [''],
-    dataHoraFim: [''],
+    dataSelecionada: [''],
+    dataHoraInicio: ['', [Validators.required]],
+    dataHoraFim: ['', [Validators.required]],
     descricaoTask: [''],
   });
   
@@ -28,37 +30,66 @@ export class UpdateActiviesModalDialogComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UpdateActiviesModalDialogComponent>,
     private _elementRef : ElementRef,
-    private recordeTasksService: RecordTasksService
+    private recordeTasksService: RecordTasksService,
+    private adapter: DateAdapter<any>
+
   ) { }
 
   ngOnInit(): void {
+    this.loadActivityInUpdateModal()
 
+    // Setando data para formato brasileiro
+    this.adapter.setLocale('pt-br')
 
-    this.editTasks()
+    setTimeout(() => {
+      this.setFocusAtInitialHour()
+         // Seta a data no padrão brasileiro
+      this.adapter.setLocale('pt-br')
+    }, 500)
   }
 
-  close(): void {
-    this.closeDialog = true
-    if(this.closeDialog) {
+  closeUpdateModal(): void {
+    this.closeModal = true
+    if(this.closeModal) {
       this.dialogRef.close();
     }
   }
 
-  // Atualizar uma atividade
-  editTasks() { 
+  setFocusAtEndTime() { 
+    let focusedInitialTime = this._elementRef.nativeElement.querySelector(`#dataHoraInicio`);
+    
+    if(focusedInitialTime.value.length === 5) {
+      let focusedEndTime = this._elementRef.nativeElement.querySelector(`#dataHoraFim`);
+      focusedEndTime.focus()
+    }
+  }
+
+  // Acessando elementos do DOM
+  setFocusAtInitialHour() {
+    let focusedInitialHour = this._elementRef.nativeElement.querySelector(`#dataHoraInicio`);
+    focusedInitialHour.focus()
+  }
+
+  // Carregar dados da atividade nos inputs para atualizar
+  loadActivityInUpdateModal() { 
     let userName = localStorage.getItem('__authenticationUserData__')
     let id = JSON.parse(localStorage.getItem('__userId__'))
     let userDate = JSON.parse(localStorage.getItem('__userDate__'))
 
+    var day = userDate.slice(8, 10)
+    var month = userDate.slice(5, 7)
+    var year = userDate.slice(0, 4)
+
+    var formattedDate = `${day}/${month}/${year}`
+
     this.recordeTasksService.getFilterName(userName, userDate).subscribe(item => {
       var data = item.itens
 
-      this.taskSelected = data
-
       data.filter(item => {
         if(item.id === id) {
+          this. activitySelected.push(item)
           this.activityLogs.get('descricaoPBI').setValue(item.descricaoPBI)
-          this.activityLogs.get('dataSelecionada').setValue(userDate)
+          this.activityLogs.get('dataSelecionada').setValue(formattedDate)
           this.activityLogs.get('descricaoTask').setValue(item.descricaoTask)
           this.activityLogs.get('dataHoraInicio').setValue(item.dataHoraInicio.slice(11, 16))
           this.activityLogs.get('dataHoraFim').setValue(item.dataHoraFim.slice(11, 16))
@@ -69,16 +100,7 @@ export class UpdateActiviesModalDialogComponent implements OnInit {
     })
   }
 
-  setFinalHourFocus() { 
-    let dataFocused = this._elementRef.nativeElement.querySelector(`#dataHoraInicio`);
-    
-    if(dataFocused.value.length === 5) {
-      let dataHoraFinalFocused = this._elementRef.nativeElement.querySelector(`#dataHoraFim`);
-      dataHoraFinalFocused.focus()
-    }
-  }
-
-  changeHourTask() {
+  updateActibityHours() {
      var data = {}
 
      let userDate = JSON.parse(localStorage.getItem('__userDate__'))
@@ -87,7 +109,7 @@ export class UpdateActiviesModalDialogComponent implements OnInit {
 
     this.activityLogs.value.dataHoraFim = userDate + "T" + this.activityLogs.value.dataHoraFim + ':00-03:00'
 
-     this.taskSelected.map(item => {
+     this. activitySelected.map(item => {
        data = {
         ...item,
         dataSelecionada: this.activityLogs.value.dataSelecionada,
@@ -96,7 +118,7 @@ export class UpdateActiviesModalDialogComponent implements OnInit {
        }
      })
 
-     this.close()
+     this.closeUpdateModal()
      
      this.recordeTasksService.updateTasks(data).subscribe()
 

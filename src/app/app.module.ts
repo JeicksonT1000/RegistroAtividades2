@@ -23,13 +23,13 @@ import { RequestInterceptorProvider } from './interceptors/request-interceptor.i
 import { ActivitiesDialogModalComponent } from './components/activities-dialog-modal/activities-dialog-modal.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {
-  MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS
 } from '@angular/material-moment-adapter'
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { UpdateActiviesModalDialogComponent } from './components/update-activies-modal-dialog/update-activies-modal-dialog.component';
-import { DeleteActivitiesModalComponent } from './components/delete-activities-modal/delete-activities-modal.component'
+import { DeleteActivitiesModalComponent } from './components/delete-activities-modal/delete-activities-modal.component';
+import { ActivitiesTimerComponent } from './components/activities-timer/activities-timer.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -44,7 +44,7 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [AppComponent, ActivityLogsComponent, LoginComponent, ActivitiesDialogModalComponent, UpdateActiviesModalDialogComponent, DeleteActivitiesModalComponent],
+  declarations: [AppComponent, ActivityLogsComponent, LoginComponent, ActivitiesDialogModalComponent, UpdateActiviesModalDialogComponent, DeleteActivitiesModalComponent, ActivitiesTimerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
