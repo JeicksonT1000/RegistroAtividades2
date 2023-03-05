@@ -50,4 +50,17 @@ export class RecordTasksService {
     };     
     return this.http.delete<any>(`${this.api.baseUrl}/registros-atividades`, options)
   }
+
+  getTimerTask(id): Observable<any> {  
+    return this.http.post<any>(`${this.api.baseUrl}/tarefas`, {
+      id: `${id}`
+    })
+  }
+
+  updateTimerTask(activity): Observable<any> {  
+    return this.http.put<any>(`${this.api.baseUrl}/tarefas`, {
+      Tarefa: activity,
+      situacao: 2
+    })
+  }
 }

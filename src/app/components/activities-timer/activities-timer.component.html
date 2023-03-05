@@ -19,11 +19,13 @@
 <section>
   <div class="container mt-5">
     <form class="row" name="activity-logs" [formGroup]="activityLogs">
-      <div class="col-md-4">
+      <div class="col-md-12">
         <div class="form-group form-group-md mt-4">
-          <mat-form-field class="full__width task-form-container" appearance="outline">
-            <mat-select id="taskID" name="taskID" formControlName="taskID" placeholder="Selecione a atividade">
-              <mat-option id="teste" *ngFor="let activity of activities" [value]="activity.id">
+          <mat-form-field class="full__width" appearance="outline">
+            <mat-select id="taskID" name="taskID" formControlName="taskID" placeholder="Selecione a atividade"
+            [(ngModel)]="activity">
+              <mat-option>Selecione a atividade</mat-option>
+              <mat-option id="teste" *ngFor="let activity of activities" [value]="activity">
                 {{ activity.tituloCompleto }}
               </mat-option>
             </mat-select>
@@ -31,5 +33,54 @@
         </div>
       </div>
     </form>
+    <p *ngIf="activity && activity.datahorainicio && !activity.datahorafim" class="font-size-xs color-black-54 pl-3">Tarefa
+      <b>iniciada</b> em {{activity.datahorainicio}}</p>
+
+    <p *ngIf="activity && activity.datahorafim" class="font-size-xs color-black-54 pl-3">Tarefa
+      <b>pausada</b> em {{activity.datahorafim | date:"dd/MM/yyyy 'às' HH:mm:ss"}}</p>
+  </div>
+  <div class="container mt-5 stopwatch-area text-center color-white">
+    <div class="row">
+      <div class="col-md-12 mt-5">
+        <div class="current-activity-timer">
+          <span *ngIf="timer">{{ timer }}</span>
+          <span *ngIf="!timer">0<span class="mr-4 ml-4">:</span>00<span class="mr-4 ml-4">:</span></span>
+        </div>
+  
+        <div class="current-activity-timer-labels">
+          <span>Horas</span>
+          <span>Minutos</span>
+          <span>Segundos</span>
+        </div>
+
+        <div class="current-actibity-timer-estimated">
+          <span class="font-size-sm">
+            <i class="material-icons color-white">access_time</i> planejadas:</span>
+          <span class="font-size-xs color-white" *ngIf="activity && activity.horasPlanejadas">{{ convertDecimalToTime(activity.horasPlanejadas) }}</span>
+          <span class="font-size-xs color-white font-size-sm" *ngIf="activity === null || activity &&  activity.horasPlanejadas === 0">00:00:00</span>
+
+
+          <span class="font-size-sm ml-4">
+            <i class="material-icons color-white">timer</i> atuadas:</span>
+          <span class="font-size-xs color-white" *ngIf="activity && activity.horasTrabalhadas">{{ convertDecimalToTime(activity.horasTrabalhadas) }}</span> 
+          <span class="font-size-xs color-white font-size-sm" *ngIf="activity === null || activity &&  activity.horasTrabalhadas === 0">00:00:00</span>
+        </div>
+
+        <div class="current-task-timer-stopwatch" *ngIf="activity">
+          <button class="btn btn-xl btn-transparent btn-rounded" (click)="pauseActivity(activity)" *ngIf="running">
+            <i class="material-icons color-white">pause</i>
+          </button>
+
+          <button class="btn btn-xl btn-transparent btn-rounded" (click)="startActivity(activity)" *ngIf="!running">
+            <i class="material-icons color-white">play_arrow</i>
+          </button>
+
+          <button class="btn btn-xl btn-transparent btn-rounded" *ngIf="running">
+            <i class="material-icons color-white">done</i>
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
