@@ -238,3 +238,9 @@ table {
     display: inline-flex !important;
   }
 }
+
+#link-cronometro {
+  left: 10px !important;
+  top: 3px;
+  margin-left: 6px;
+}

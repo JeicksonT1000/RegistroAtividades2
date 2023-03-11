@@ -250,10 +250,35 @@ body {
   vertical-align: baseline !important;
 }
 
+.link {
+  color: rgba(0,0,0,.60);
+  font-size: 18px;
+  position: relative;
+  left: -18px;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,.87);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.link:hover {
+  color: #fff;
+  font-size: 18px;
+  color: white;
+  background-color: rgba(0,0,0,.87);
+}
+
+.activity-message-info {
+  position: relative;
+  left: -15px;
+  padding-bottom: 12px;
+}
+
+
 /* Lista de coloborador */
 #colaborador-panel {
   position: relative;
-  top: 147px;
+  top: 147px !important;
   max-height: 400px !important;
   min-width: calc(97% + 32px) !important;
   left: 4px;
@@ -262,9 +287,16 @@ body {
 #taskID-panel {
   position: relative;
   top: 30px;
-  max-height: 400px !important;
+  max-height: 500px !important;
   min-width: calc(97.6% + 32px) !important;
   right: 10px;
+}
+
+#taskID-panel-timer-panel {
+  max-height: 600px !important;
+  top: 150.455px !important;
+  left: 296px !important;
+  transform: translateX(0) translateY(0) !important;
 }
 
 #cdk-overlay-2 {
@@ -369,6 +401,16 @@ button {
   background-color: rgba(0,0,0,.12);
   cursor: auto;
   pointer-events: none;
+}
+
+.material-symbols-outlined {
+  position: relative;
+  top: 10px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48,
 }
 
 @media (min-width: 768px) {

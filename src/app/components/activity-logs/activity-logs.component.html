@@ -54,12 +54,13 @@
       <div class="col-md-6 text-left">
         <button class="btn btn-md btn-primary mr-4" (click)="openModalActivities()">Novo registro</button>
         <button class="btn btn-md btn-primary" onclick="window.print()">Imprimir</button>
+        <a routerLink="/cronometro" class="link" id="link-cronometro">acessar cronometro</a>
       </div>
     </div>
 
     <div *ngIf="!isNotReady">Carregando...</div>
 
-		<div class="alert alert-info" *ngIf="!isReady && isReady !== undefined">
+		<div class="alert alert-info" *ngIf="!isReady && isReady !== undefined || tasksList.length === 0">
 			Não há registro de atividades nesta data.
 		</div> 
 

@@ -1,0 +1,48 @@
+
+.col-md-12 {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.col-md-6 {
+  position: relative;
+  width: 44.7%;
+  min-height: 1px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+#dialogModal {
+  width: 600px;
+}
+
+label {
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+label.colaborador,
+label.task-description {
+  font-size: 16px;
+}
+
+
+#modal-title {
+  font-weight: 500;
+}
+
+.modal-footer {
+  justify-content: flex-end;
+}
+
+.btn-footer {
+  margin-right: 18px;
+}
+
+.btn-cancelar {
+  margin-right: 12px;
+}

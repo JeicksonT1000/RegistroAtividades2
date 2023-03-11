@@ -9,11 +9,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: LoginComponent },
   {
-    path: '',
+    path: 'registro-atividades',
     component: ActivityLogsComponent,
     canActivate: [AuthGuard],
   }, {
-    path: 'registro-atividades',
+    path: 'cronometro',
     component: ActivitiesTimerComponent,
     canActivate: [AuthGuard],
   },

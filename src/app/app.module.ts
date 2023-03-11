@@ -30,7 +30,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { UpdateActiviesModalDialogComponent } from './components/update-activies-modal-dialog/update-activies-modal-dialog.component';
 import { DeleteActivitiesModalComponent } from './components/delete-activities-modal/delete-activities-modal.component';
 import { ActivitiesTimerComponent } from './components/activities-timer/activities-timer.component';
-import { MessageComponent } from './components/message/message.component'
+import { MessageComponent } from './components/message/message.component';
+import { ModalActivityDoneComponent } from './components/modal-activity-done/modal-activity-done.component'
 
 export const MY_FORMATS = {
   parse: {
@@ -45,7 +46,7 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [AppComponent, ActivityLogsComponent, LoginComponent, ActivitiesDialogModalComponent, UpdateActiviesModalDialogComponent, DeleteActivitiesModalComponent, ActivitiesTimerComponent, MessageComponent],
+  declarations: [AppComponent, ActivityLogsComponent, LoginComponent, ActivitiesDialogModalComponent, UpdateActiviesModalDialogComponent, DeleteActivitiesModalComponent, ActivitiesTimerComponent, MessageComponent, ModalActivityDoneComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

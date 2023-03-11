@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { MessageService } from 'src/app/services/message.service';
 import { RecordTasksService } from 'src/app/services/record-tasks.service';
 import { UserLoggedService } from 'src/app/services/user-logged.service';
+import { ModalActivityDoneComponent } from '../modal-activity-done/modal-activity-done.component';
 
 @Component({
   selector: 'app-activities-timer',
@@ -19,9 +21,10 @@ export class ActivitiesTimerComponent implements OnInit {
 	running = false;
   activity = null
   timer = String(moment().hour(0).minute(0).second(0).format("00 : 00 : 00"))
-  horasTrabalhadas 
+  horasTrabalhadas = 0
   countTimer = moment().hour(0).minute(0).second(0)
-
+  stopTimer = false
+  
   // Tempo trabalhado
   workedTime = undefined;
 
@@ -38,17 +41,27 @@ export class ActivitiesTimerComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private userLoggedService: UserLoggedService,
     private recordeTasksService: RecordTasksService,
-    public messageService: MessageService
-
+    public messageService: MessageService,
+    private _elementRef : ElementRef,
+    public dialog: MatDialog,
   ) { }
   
 
   ngOnInit(): void {
-    this.titleService.setTitle('Registro de atividades manuais');
+    this.titleService.setTitle('Countador de atividades');
 
     this.recordActivities();
+
+    setTimeout(() => {
+      let focusedTaskDescription = this._elementRef.nativeElement.querySelector(`#taskID-panel-timer`);
+      focusedTaskDescription.click()    
+    }, 600)
   }
 
+  openModalActivityDone(activity): void {
+    this.dialog.open(ModalActivityDoneComponent)
+    localStorage.setItem('__userId__', JSON.stringify(activity))
+  }
 
   getUsersLogged() {
     this.userLoggedService.getUsers().subscribe((response) => {
@@ -59,7 +72,6 @@ export class ActivitiesTimerComponent implements OnInit {
       this.activityLogs.get('nomeUsuario').setValue(user);
     });
   }
-
 
   // Recupera as atividades
   recordActivities() {
@@ -109,13 +121,13 @@ export class ActivitiesTimerComponent implements OnInit {
   }
 
   stopwatch(activity) { 
-    this.timer = String(moment(this.countTimer).add(this.counter++, 'seconds').format("HH:mm:ss"))
+    this.timer = String(moment(this.countTimer).add(this.counter++, 'seconds').format("HH : mm : ss"))
     
     this.workedTime = moment(this.workedTime).add(1, 'seconds');
 
-    if (!this.horasTrabalhadas)
-      this.horasTrabalhadas = activity.horasTrabalhadas;
-    activity.horasTrabalhadas = (Math.abs(Number(this.timer)) / 1000 / 60 / 60) + this.horasTrabalhadas;
+    // if (!this.horasTrabalhadas)
+    //   this.horasTrabalhadas = activity.horasTrabalhadas;
+    // activity.horasTrabalhadas = (Math.abs(Number(this.timer)) / 1000 / 60 / 60) + this.horasTrabalhadas;
   };
 
 
@@ -131,19 +143,37 @@ export class ActivitiesTimerComponent implements OnInit {
       this.running = true
     }
 
-    activity.dataHoraInicio = new Date()
+    activity.datahorainicio = new Date()
 
     this.recordeTasksService.getTimerTask(activity.id).subscribe(() => {
-    this.messageService.showMessage(" Tarefa iniciada")
+      this.messageService.showMessage('A atividade #' + activity.id + ' foi iniciada.')
     })
   }
 
   pauseActivity(activity) {
-    
+    clearInterval(this.runClock);
+    this.runClock = null;
+    this.running = false;
+
+    this.recordeTasksService.updateTimerTask(activity).subscribe(() => {
+
+      this.messageService.showMessage('A atividade #' + activity.id + ' foi pausada.')
+
+      this.clearTime()
+    })
   }
 
-  doneActivity(activity) {
-    
-  }
+  ngDoCheck() {
+    let reload = JSON.parse(localStorage.getItem('__reloadPage__'))
 
+    if(!!reload && reload === true) {
+      setTimeout(() => {
+        window.location.reload()
+      }, 100)
+
+      setTimeout(() => {
+        localStorage.removeItem('__reloadPage__')
+      }, 150)
+    }
+  }
 }

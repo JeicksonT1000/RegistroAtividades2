@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div id="activity_modal">
+    <div class="modal-header">
+      <h5 id="modal-title" class="font-size-lg">Concluir atividade?</h5>
+      <button type="button" id="btn-close">
+        <span class="material-icons" aria-hidden="true" (click)="closeActivityDoneModal()">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>Tem certeza que deseja concluir a atividade?</p>
+    </div>
+    <div class="row modal-footer">
+      <div class="btn-footer">
+        <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="closeActivityDoneModal()">cancelar</button>
+        <button type="submit" class="btn-salvar btn btn-md btn-primary" (click)="doneActivity()">confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

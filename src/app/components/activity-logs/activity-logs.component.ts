@@ -37,7 +37,8 @@ export class ActivityLogsComponent implements OnInit {
     public dialog: MatDialog,
     private adapter: DateAdapter<any>,
     private recordTasksService: RecordTasksService,
-    private _elementRef : ElementRef
+    private _elementRef : ElementRef,
+    
   ) {
   }
 

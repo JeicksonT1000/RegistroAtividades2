@@ -60,7 +60,14 @@ export class RecordTasksService {
   updateTimerTask(activity): Observable<any> {  
     return this.http.put<any>(`${this.api.baseUrl}/tarefas`, {
       Tarefa: activity,
-      situacao: 2
+      Situacao: 2
+    })
+  }
+
+  doneTimerTask(activity): Observable<any> {  
+    return this.http.put<any>(`${this.api.baseUrl}/tarefas`, {
+      Tarefa: activity,
+      Situacao: 3
     })
   }
 }

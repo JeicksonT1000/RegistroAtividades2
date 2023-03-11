@@ -12,8 +12,8 @@ export class MessageService {
     this.message = message
 
     setTimeout(() => {
-
-    }, 1000)
+      this.clearMessage()
+    }, 1500)
   }
 
   clearMessage() {
