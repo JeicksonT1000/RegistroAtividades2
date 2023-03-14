@@ -16,7 +16,6 @@
     </div>
   </div>
 </header>
-<div class="divisor"></div>
 <section>
   <div class="container mt-5">
     <form class="row" name="activity-logs" [formGroup]="activityLogs">
@@ -54,7 +53,7 @@
       <div class="col-md-6 text-left">
         <button class="btn btn-md btn-primary mr-4" (click)="openModalActivities()">Novo registro</button>
         <button class="btn btn-md btn-primary" onclick="window.print()">Imprimir</button>
-        <a routerLink="/cronometro" class="link" id="link-cronometro">acessar cronometro</a>
+        <a routerLink="/cronometro" class="link" id="link-cronometro">Acessar contador</a>
       </div>
     </div>
 
@@ -64,7 +63,7 @@
 			Não há registro de atividades nesta data.
 		</div> 
 
-		<div *ngIf="isReady">
+		<div *ngIf="isReady || tasksList.length > 0">
 			<table class="table align-left">
 				<tr id="table-header font-weight-medium">
 					<th title="Product Backlog Item">PBI</th>

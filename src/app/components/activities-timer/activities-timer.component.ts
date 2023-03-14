@@ -56,6 +56,8 @@ export class ActivitiesTimerComponent implements OnInit {
       let focusedTaskDescription = this._elementRef.nativeElement.querySelector(`#taskID-panel-timer`);
       focusedTaskDescription.click()    
     }, 600)
+
+    localStorage.removeItem('__stopTimer__')
   }
 
   openModalActivityDone(activity): void {
@@ -157,6 +159,10 @@ export class ActivitiesTimerComponent implements OnInit {
 
     this.recordeTasksService.updateTimerTask(activity).subscribe(() => {
 
+      
+      activity.datahorafim = new Date()
+
+
       this.messageService.showMessage('A atividade #' + activity.id + ' foi pausada.')
 
       this.clearTime()
@@ -173,6 +179,7 @@ export class ActivitiesTimerComponent implements OnInit {
 
       setTimeout(() => {
         localStorage.removeItem('__reloadPage__')
+        localStorage.removeItem('__stopTimer__')
       }, 150)
     }
   }

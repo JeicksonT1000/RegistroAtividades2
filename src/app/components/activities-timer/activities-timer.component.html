@@ -18,8 +18,8 @@
   </div>
 </header>
 <section>
-  <div class="container mt-5">
-    <form id="timer-form" class="row" name="activity-logs" [formGroup]="activityLogs">
+  <div id="content-form-timer" class="container-fluid mt-5">
+    <form id="timer-form" name="activity-logs" [formGroup]="activityLogs">
       <div class="col-md-12">
         <div class="form-group form-group-md mt-4">
           <mat-form-field class="full__width" appearance="outline">
@@ -52,9 +52,9 @@
       <b>pausada</b> em {{activity.datahorafim | date:"dd/MM/yyyy 'às' HH:mm:ss"}}
     </p>
 
-    <a routerLink="/registro-atividades" class="mr-4 link">acessar registro atividades</a>
+    <a routerLink="/registro-atividades" class="mr-4 link">Acessar registro manual</a>
   </div>
-  <div class="container mt-5 stopwatch-area text-center color-white">
+  <div class="container-fluid mt-5 stopwatch-area text-center color-white">
     <div class="row">
       <div class="col-md-12 mt-5">
         <div class="current-activity-timer">

@@ -164,6 +164,13 @@ table {
   width: 100%;
   max-width: 100%;
 }
+
+#link-cronometro {
+  right: -539px;
+  top: -150px;
+  width: 120px;
+}
+
 /* Responsividade */
 @media (min-width: 576px) {
   .container {
@@ -237,10 +244,4 @@ table {
   .d-print-inline-flex {
     display: inline-flex !important;
   }
-}
-
-#link-cronometro {
-  left: 10px !important;
-  top: 3px;
-  margin-left: 6px;
 }

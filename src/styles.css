@@ -252,18 +252,22 @@ body {
 
 .link {
   color: rgba(0,0,0,.60);
-  font-size: 18px;
-  position: relative;
-  left: -18px;
+  font-size: 14px;
+  font-family: 'Circular Std';
+  position: absolute;
+  right: 0;
+  top: 160px;
   text-decoration: none;
   border: 1px solid rgba(0,0,0,.87);
   border-radius: 5px;
   padding: 10px;
+  text-align: center;
+  font-weight: 500px;
+  width: 160px;
 }
 
 .link:hover {
   color: #fff;
-  font-size: 18px;
   color: white;
   background-color: rgba(0,0,0,.87);
 }
