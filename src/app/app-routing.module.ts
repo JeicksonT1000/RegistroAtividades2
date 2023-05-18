@@ -12,7 +12,8 @@ const routes: Routes = [
     path: 'registro-atividades',
     component: ActivityLogsComponent,
     canActivate: [AuthGuard],
-  }, {
+  },
+  {
     path: 'cronometro',
     component: ActivitiesTimerComponent,
     canActivate: [AuthGuard],
