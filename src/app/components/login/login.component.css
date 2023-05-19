@@ -1,3 +1,7 @@
 .form-min-width {
   min-width: 347.98px;
 }
+
+.btn-mt-login {
+  margin-top: 0.4rem;
+}

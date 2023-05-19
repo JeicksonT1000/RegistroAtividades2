@@ -23,30 +23,30 @@
           <div class="col-md-6">
             <div class="form-group form-group-md mt-4">
               <label class="font-weight-medium">Data</label>
-              
-              <mat-form-field class="full__width" appearance="outline">
-                <input (focus)="picker.open()" (click)="picker.open()" matInput [matDatepicker]="picker" 
-                id="datePicker" name="datePicker" formControlName="datePicker" autocomplete="off"
-                >
-                <mat-datepicker #picker
-                (closed)="setFocusOnTaskDescription()"
-                ></mat-datepicker>
+
+              <mat-form-field class="full__width" appearance="outline" id="fieldDataNew">
+                <input (focus)="picker.open()" (click)="picker.open()" matInput [matDatepicker]="picker" id="datePicker"
+                  name="datePicker" formControlName="datePicker" autocomplete="off">
+                <mat-datepicker #picker (closed)="setFocusOnTaskDescription()"></mat-datepicker>
               </mat-form-field>
             </div>
-            <span class="message-error" *ngIf="activityLogs.get('datePicker')?.errors?.['required'] && formDir.submitted">
+            <span class="message-error"
+              *ngIf="activityLogs.get('datePicker')?.errors?.['required'] && formDir.submitted">
               *Campo obrigatório
             </span>
           </div>
         </div>
         <div>
-            <label class="task-description">Descrição task</label>
-            <mat-form-field class="full__width task-form-container" appearance="outline">
-              <mat-select id="taskID" name="taskID" formControlName="taskID" placeholder="Selecione o colaborador para visualizar as atividades">
-                <mat-option id="teste" *ngFor="let activity of activities" [value]="activity.id" (click)="setFocusAtInitialHour()">
-                  {{ activity.tituloCompleto }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+          <label class="task-description">Descrição task</label>
+          <mat-form-field class="full__width task-form-container" appearance="outline">
+            <mat-select id="taskID" name="taskID" formControlName="taskID"
+              placeholder="Selecione o colaborador para visualizar as atividades">
+              <mat-option id="teste" *ngFor="let activity of activities" [value]="activity.id"
+                (click)="setFocusAtInitialHour()">
+                {{ activity.tituloCompleto }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
         <span class="message-error" *ngIf="activityLogs.get('taskID')?.errors?.['required'] && formDir.submitted">
           *Campo obrigatório
@@ -55,26 +55,28 @@
           <div class="col-md-6">
             <div class="form-group form-group-md mt-4">
               <label>Hora inicial</label>
-    
+
               <mat-form-field class="full__width" appearance="outline">
-                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput autocomplete="off" (keyup)="setFocusAtFinalHour()">
+                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput
+                  autocomplete="off" (keyup)="setFocusAtFinalHour()">
               </mat-form-field>
             </div>
-            <span class="message-error" *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
+            <span class="message-error"
+              *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
               *Campo obrigatório
             </span>
           </div>
           <div class="col-md-6">
             <div class="form-group form-group-md mt-4">
               <label>Hora final</label>
-    
+
               <mat-form-field class="full__width" appearance="outline">
-                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput autocomplete="off"
-                (keyup)="setFocusOnSaveButton()"  
-                >
+                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput
+                  autocomplete="off" (keyup)="setFocusOnSaveButton()">
               </mat-form-field>
             </div>
-            <span class="message-error" *ngIf="activityLogs.get('dataHoraFim')?.errors?.['required'] && formDir.submitted">
+            <span class="message-error"
+              *ngIf="activityLogs.get('dataHoraFim')?.errors?.['required'] && formDir.submitted">
               *Campo obrigatório
             </span>
           </div>
@@ -82,8 +84,10 @@
         <div class="divisor"></div>
         <div class="row modal-footer">
           <div class="btn-footer">
-            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="closeActivityModal()">cancelar</button>
-            <button type="submit" id="btn-save" class="btn-save btn btn-md btn-primary" (click)="registerActivity()">salvar</button>
+            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary"
+              (click)="closeActivityModal()">cancelar</button>
+            <button type="submit" id="btn-save" class="btn-save btn btn-md btn-primary"
+              (click)="registerActivity()">salvar</button>
           </div>
         </div>
       </form>

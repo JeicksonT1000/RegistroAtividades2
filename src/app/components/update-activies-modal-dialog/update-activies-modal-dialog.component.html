@@ -8,59 +8,64 @@
     </div>
     <div class="divisor"></div>
     <div class="modal-body">
-      <form id="form-activity-modal"name="form_activity_modal" [formGroup]="activityLogs" #formDir="ngForm">
+      <form id="form-activity-modal" name="form_activity_modal" [formGroup]="activityLogs" #formDir="ngForm">
         <div class="row">
           <div class="col-md-6" id="data_disabled_background">
             <div class="form-group form-group-md mt-4">
               <label>PBI #{{ pbi }}</label>
-              
-              <mat-form-field class="full__width" appearance="outline">
-                <input id="descricaoPBI" type="text" [readonly]="true" name="descricaoPBI" formControlName="descricaoPBI" matInput autocomplete="off">
+
+              <mat-form-field class="full__width disabled" appearance="outline">
+                <input id="descricaoPBI" type="text" [readonly]="true" name="descricaoPBI"
+                  formControlName="descricaoPBI" matInput autocomplete="off">
               </mat-form-field>
             </div>
           </div>
           <div class="col-md-6" id="pbi_disabled_background">
             <div class="form-group form-group-md mt-4">
               <label>Data</label>
-              
-              <mat-form-field class="full__width" appearance="outline">
-                <input matInput [readonly]="true" 
-                id="dataSelecionada" class="readonly " name="dataSelecionada" formControlName="dataSelecionada" autocomplete="off"
-                >
+
+              <mat-form-field class="full__width disabled" appearance="outline" id="fieldDataAlt">
+                <input matInput [readonly]="true" id="dataSelecionada" class="readonly" name="dataSelecionada"
+                  formControlName="dataSelecionada" autocomplete="off">
               </mat-form-field>
             </div>
           </div>
         </div>
-     
+
         <div class="form-group form-group-md mt-4" id="task_disabled_background">
           <label>Descrição da task #{{ taskID }}</label>
-          <mat-form-field class="full__width task-form-container" appearance="outline">
-            <input id="descricaoTask" class="readonly" [readonly]="true" type="text" name="descricaoTask" formControlName="descricaoTask" matInput autocomplete="off">
+          <mat-form-field class="full__width task-form-container disabled" appearance="outline">
+            <input id="descricaoTask" class="readonly" [readonly]="true" type="text" name="descricaoTask"
+              formControlName="descricaoTask" matInput autocomplete="off">
           </mat-form-field>
         </div>
-       
+
         <div class="row hours-padding">
           <div class="col-md-6">
             <div class="form-group form-group-md mt-4">
               <label>Hora inicial</label>
-    
+
               <mat-form-field class="full__width" appearance="outline">
-                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput autocomplete="off" (keyup)="setFocusAtEndTime()">
+                <input id="dataHoraInicio" type="text" name="dataHoraInicio" formControlName="dataHoraInicio" matInput
+                  autocomplete="off" (keyup)="setFocusAtEndTime()">
               </mat-form-field>
             </div>
-            <span class="message-error" *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
+            <span class="message-error"
+              *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
               *Campo obrigatório
             </span>
           </div>
           <div class="col-md-6">
             <div class="form-group form-group-md mt-4">
               <label>Hora final</label>
-    
+
               <mat-form-field class="full__width" appearance="outline">
-                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput autocomplete="off">
+                <input id="dataHoraFim" type="text" name="dataHoraFim" formControlName="dataHoraFim" matInput
+                  autocomplete="off">
               </mat-form-field>
             </div>
-            <span class="message-error" *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
+            <span class="message-error"
+              *ngIf="activityLogs.get('dataHoraInicio')?.errors?.['required'] && formDir.submitted">
               *Campo obrigatório
             </span>
           </div>
@@ -68,8 +73,10 @@
         <div class="divisor"></div>
         <div class="row modal-footer">
           <div class="btn-footer">
-            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary" (click)="closeUpdateModal()">cancelar</button>
-            <button type="submit" class="btn-salvar btn btn-md btn-primary" (click)="updateActibityHours()">salvar</button>
+            <button type="submit" class="btn-cancelar btn btn-md btn-tertiary"
+              (click)="closeUpdateModal()">cancelar</button>
+            <button type="submit" class="btn-salvar btn btn-md btn-primary"
+              (click)="updateActibityHours()">salvar</button>
           </div>
         </div>
       </form>

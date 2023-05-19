@@ -4,23 +4,21 @@ import { Observable } from 'rxjs';
 import { API_CONFIG } from '../config/api.config';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecordTasksService {
   private api = API_CONFIG;
-   
-  constructor(
-    private http: HttpClient
-  ) { }
+
+  constructor(private http: HttpClient) {}
 
   getTasks(name): Observable<any> {
     return this.http.get<any>(`${this.api.baseUrl}/tarefas`, {
       params: {
         paginaAtual: 1,
         registrosPorPagina: 25,
-        nomeUsuario: name
-      }
-    })
+        nomeUsuario: name,
+      },
+    });
   }
 
   getFilterName(name, data): Observable<any> {
@@ -29,45 +27,47 @@ export class RecordTasksService {
         paginaAtual: 1,
         registrosPorPagina: 25,
         nomeUsuario: name,
-        dataInicio: data
-      }
-    })
+        dataInicio: data,
+      },
+    });
   }
 
   updateTasks(data): Observable<any> {
-    return this.http.put<any>(`${this.api.baseUrl}/registros-atividades`, data)
+    return this.http.put<any>(`${this.api.baseUrl}/registros-atividades`, data);
   }
 
-  deleteTask(id): Observable<any> {  
-    
+  deleteTask(id): Observable<any> {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       body: {
-        id: `${id}`
+        id: `${id}`,
       },
-    };     
-    return this.http.delete<any>(`${this.api.baseUrl}/registros-atividades`, options)
+    };
+    return this.http.delete<any>(
+      `${this.api.baseUrl}/registros-atividades`,
+      options
+    );
   }
 
-  getTimerTask(id): Observable<any> {  
+  getTimerTask(id): Observable<any> {
     return this.http.post<any>(`${this.api.baseUrl}/tarefas`, {
-      id: `${id}`
-    })
+      id: `${id}`,
+    });
   }
 
-  updateTimerTask(activity): Observable<any> {  
+  updateTimerTask(activity): Observable<any> {
     return this.http.put<any>(`${this.api.baseUrl}/tarefas`, {
       Tarefa: activity,
-      Situacao: 2
-    })
+      Situacao: 2,
+    });
   }
 
-  doneTimerTask(activity): Observable<any> {  
+  doneTimerTask(activity): Observable<any> {
     return this.http.put<any>(`${this.api.baseUrl}/tarefas`, {
       Tarefa: activity,
-      Situacao: 3
-    })
+      Situacao: 3,
+    });
   }
 }
